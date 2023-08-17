@@ -5,7 +5,7 @@ from mesa.time import RandomActivation
 from mesa.space import MultiGrid
 
 class VaccuumWorld(Model):
-    def __init__ (self, N, D, width, height):
+    def __init__ (self, N: int, D: int, width: int, height: int):
         #self.running = True
         self.num_agents = N
         self.num_dirt = D

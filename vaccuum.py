@@ -1,5 +1,5 @@
 from mesa import Agent
-from random import randint
+from mesa.model import Model
 
 def get_color(random_int):
     """
@@ -34,13 +34,13 @@ class VaccuumAgent(Agent):
     """
     A class representing a vaccuum agent that cleans dirt from a grid world.
     """
-    def __init__(self, unique_id, model):
+    def __init__(self, unique_id: int, model: Model) -> None:
         """
         Constructor method that initializes the VaccuumAgent object with a unique ID and a reference to the model it belongs to.
 
         Args:
             unique_id (int): A unique identifier for the agent.
-            model (object): A reference to the model the agent belongs to.
+            model (Model): A reference to the model the agent belongs to.
         """
         super().__init__(unique_id, model)
         self.steps = 0  # Number of steps taken
@@ -51,6 +51,7 @@ class VaccuumAgent(Agent):
         # Strip the string "vaccuum_" from the unique_id to get the random integer
         random_int = int(unique_id[8:])
         self.color = get_color(random_int)
+        
 
     def clean(self) -> None:
         """
@@ -75,7 +76,7 @@ class VaccuumAgent(Agent):
         except:
             pass
         
-    def get_possible_steps(self, position) -> list:
+    def get_possible_steps(self, position: tuple) -> list:
         """
         Method that takes a position as input and returns a list of neighboring cells that are not obstacles or other agents. It also updates the adjacent_steps list with any new adjacent steps that have not been visited before.
 

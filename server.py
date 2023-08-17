@@ -4,8 +4,9 @@ from mesa.visualization.ModularVisualization import ModularServer
 from model import VaccuumWorld
 from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.UserParam import Slider
+from mesa import Agent
 
-def agent_portrayal(agent):
+def agent_portrayal(agent: Agent):
     #Check if the agent is an instance of class VaccuumAgent
     if type(agent).__name__ == "VaccuumAgent":
         #Get random color for each agent
