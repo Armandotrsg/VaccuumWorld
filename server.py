@@ -8,10 +8,11 @@ from mesa.visualization.UserParam import Slider
 def agent_portrayal(agent):
     #Check if the agent is an instance of class VaccuumAgent
     if type(agent).__name__ == "VaccuumAgent":
+        #Get random color for each agent
         portrayal = {"Shape": "circle",
                      "Filled": "true",
                      "Layer": 1,
-                     "Color": "blue",
+                     "Color": agent.color,
                      "r": 0.5}
     elif type(agent).__name__ == "Dirt":
         portrayal = {"Shape": "rect",
