@@ -37,9 +37,6 @@ class VaccuumWorld(Model):
             x = self.random.randrange(self.grid.width)
             y = self.random.randrange(self.grid.height)
             self.grid.place_agent(d, (x, y))
-                
-            
-            
-        
+
     def step(self):
         self.schedule.step()
