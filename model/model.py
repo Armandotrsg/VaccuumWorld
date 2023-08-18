@@ -15,20 +15,6 @@ class VacuumWorld(Model):
         self.grid = MultiGrid(width, height, False)
         self.schedule = RandomActivation(self)
         self.dirt_count = 0
-        
-        for i in range(self.num_agents):
-            unique_id = f"vaccuum_{i}"
-            a = VacuumAgent(unique_id, self)
-            self.schedule.add(a)
-            
-            # Add the agent to a random grid cell where there is no other agent
-            try:
-                start_cell = self.grid.find_empty()
-                self.grid.place_agent(a, start_cell)
-            except:
-                x = self.random.randrange(self.grid.width)
-                y = self.random.randrange(self.grid.height)
-                self.grid.place_agent(a, (x, y))
                 
         for i in range(self.num_dirt):
             unique_id = f"dirt_{i}"
@@ -41,6 +27,16 @@ class VacuumWorld(Model):
             y = self.random.randrange(self.grid.height)
             self.grid.place_agent(d, (x, y))
         
+        for i in range(self.num_agents):
+            unique_id = f"vaccuum_{i}"
+            a = VacuumAgent(unique_id, self)
+            self.schedule.add(a)
+            
+            # Add the agent to a random grid cell where there is no other agent
+            x = self.random.randrange(self.grid.width)
+            y = self.random.randrange(self.grid.height)
+            self.grid.place_agent(a, (x, y))
+        
         for i in range(self.num_obstacles):
             unique_id = f"obstacle_{i}"
             o = Obstacle(unique_id, self)
@@ -50,6 +46,8 @@ class VacuumWorld(Model):
             x = self.random.randrange(self.grid.width)
             y = self.random.randrange(self.grid.height)
             self.grid.place_agent(o, (x, y))
-
+            if not self.grid.is_cell_empty((x, y)):
+                self.grid.move_to_empty(o)
+                
     def step(self):
         self.schedule.step()
