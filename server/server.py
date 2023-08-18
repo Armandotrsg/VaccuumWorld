@@ -22,6 +22,7 @@ def agent_portrayal(agent: Agent):
                      "Color": "brown",
                      "w": 1,
                      "h": 1}
+    
     else: #Type obstacle
         portrayal = {"Shape": "rect",
                         "Filled": "true",
@@ -38,10 +39,13 @@ def run():
 
     number_of_agents = Slider("Number of agents", 2, 1, x)
     number_of_dirt = Slider("Number of dirt", 2, 1, x*y)
+    number_of_obstacles = Slider("Number of obstacles", 2, 1, (x*y)/2)
+
 
     model_params = {
         "N": number_of_agents,
         "D": number_of_dirt,
+        "O": number_of_obstacles,
         "width": x,
         "height": y
     }
