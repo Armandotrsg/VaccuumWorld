@@ -63,6 +63,9 @@ Antes de ejecutar el programa, se recomienda configurar un entorno virtual. Esto
 ### Entendiendo el Código
 
 - **VaccuumAgent**: Representa al agente aspirador. Tiene métodos para limpiar la suciedad y moverse a celdas vecinas.
+- **Dirt**: Representa el espacio con suciedad. En el momento que `VacuumAgent` ingresa a esta celda, se vuelve en una celda limpia.
+- **Obstacle**: Representa al los obstaculos dentro de la cuadricula. `VacuumAgent` No puede ingresar a esta celda. Se limito su cantidad a 30.
+
 - **VaccuumWorld**: Representa el modelo del mundo. Inicializa la cuadrícula, los agentes y la suciedad.
 - **Server**: Contiene la configuración de visualización para el servidor MESA. Define cómo se representan los agentes y la suciedad en la cuadrícula.
 - **Main.py**: El punto de entrada del programa. Inicia el servidor MESA.
