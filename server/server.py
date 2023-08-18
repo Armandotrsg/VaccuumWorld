@@ -39,7 +39,7 @@ def run():
 
     number_of_agents = Slider("Number of agents", 2, 1, x)
     number_of_dirt = Slider("Number of dirt", 2, 1, x*y)
-    number_of_obstacles = Slider("Number of obstacles", 2, 1, (x*y)/2)
+    number_of_obstacles = Slider("Number of obstacles", 2, 1, 30)
 
 
     model_params = {
