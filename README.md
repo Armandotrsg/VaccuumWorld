@@ -1,4 +1,4 @@
-# Documentación para el Programa VacuumWorld
+# VacuumWorld
 
 ### Introducción
 
