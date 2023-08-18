@@ -8,7 +8,7 @@ from mesa import Agent
 
 def agent_portrayal(agent: Agent):
     #Check if the agent is an instance of class VaccuumAgent
-    if type(agent).__name__ == "VaccuumAgent":
+    if type(agent).__name__ == "VacuumAgent":
         #Get random color for each agent
         portrayal = {"Shape": "circle",
                      "Filled": "true",
