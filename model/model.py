@@ -1,6 +1,6 @@
 from mesa import Model 
-from vaccuum import VaccuumAgent
-from dirt import Dirt
+from agents.vaccuum import VaccuumAgent
+from agents.dirt import Dirt
 from mesa.time import RandomActivation
 from mesa.space import MultiGrid
 

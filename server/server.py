@@ -1,7 +1,7 @@
 from mesa.visualization.modules import CanvasGrid 
 from mesa.visualization.ModularVisualization import ModularServer
 
-from model import VaccuumWorld
+from model.model import VaccuumWorld
 from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.UserParam import Slider
 from mesa import Agent
