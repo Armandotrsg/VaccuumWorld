@@ -48,6 +48,7 @@ class VacuumAgent(Agent):
         self.adjacent_steps = []  # Possible steps for DFS
         self.visited = []  # Visited tiles
         self.is_returning = False  # Is returning to previous cell in adjacent_steps
+        self.return_counter = -1  # Counter for returning to previous cell
         # Strip the string "Vacuum_" from the unique_id to get the random integer
         random_int = int(unique_id[8:])
         self.color = get_color(random_int)
@@ -107,7 +108,7 @@ class VacuumAgent(Agent):
     def returnToPreviousCell(self) -> None:
         print("Returning")
         # If the agent is returning, get the last visited cell and the last adjacent step which is the target position
-        new_position = self.visited[-1] # New position is the last visited cell
+        new_position = self.visited[self.return_counter] # New position is the last visited cell
         target_position = self.adjacent_steps[-1] # Target position is the last adjacent step
 
         possible_steps = self.model.grid.get_neighborhood(self.pos, moore=False, include_center=False)
@@ -129,7 +130,13 @@ class VacuumAgent(Agent):
             self.model.grid.move_agent(self, target_position)
             self.adjacent_steps.pop()
             self.is_returning = False
+            self.return_counter = -1 # Reset the return counter
+            # Chop the array of the visited cells to the amount of cells that have been back tracked before
+            for i in range(-1, self.return_counter, -1):
+                self.visited.insert(0, self.visited.pop())
         elif new_position in possible_steps: 
+            self.return_counter -= 1 # Decrement the return counter
+            
             self.model.grid.move_agent(self, new_position)
 
     def move(self) -> None:
@@ -142,7 +149,6 @@ class VacuumAgent(Agent):
         print(self.is_returning)
         if not self.is_returning:
             # If the agent is not returning, add the current position to visited and get possible steps
-            self.visited.append(self.pos)
             possible_steps = self.get_possible_steps(self.pos)
             
             if len(possible_steps) == 0:
@@ -151,6 +157,7 @@ class VacuumAgent(Agent):
                 self.is_returning = True
                 self.returnToPreviousCell()
             else:
+                self.visited.append(self.pos)
                 # If there are possible steps, move to the last adjacent step in adjacent_steps
                 new_position = self.adjacent_steps.pop()
                 self.model.grid.move_agent(self, new_position)
