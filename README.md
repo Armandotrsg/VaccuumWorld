@@ -62,18 +62,18 @@ Antes de ejecutar el programa, se recomienda configurar un entorno virtual. Esto
 
 ### Entendiendo el Código
 
-- **VaccuumAgent**: Representa al agente aspirador. Tiene métodos para limpiar la suciedad y moverse a celdas vecinas.
+- **VacuumAgent**: Representa al agente aspirador. Tiene métodos para limpiar la suciedad y moverse a celdas vecinas.
 - **Dirt**: Representa el espacio con suciedad. En el momento que `VacuumAgent` ingresa a esta celda, se vuelve en una celda limpia.
-- **Obstacle**: Representa al los obstáculos dentro de la cuadrícula. `VacuumAgent` no puede ingresar a esta celda. Se limitó su cantidad a 30.
+- **Obstacle**: Representa a los obstáculos dentro de la cuadrícula. `VacuumAgent` no puede ingresar a esta celda. Se limitó su cantidad a 30.
 
-- **VaccuumWorld**: Representa el modelo del mundo. Inicializa la cuadrícula, los agentes y la suciedad.
-- **Server**: Contiene la configuración de visualización para el servidor MESA. Define cómo se representan los agentes y la suciedad en la cuadrícula.
+- **VacuumWorld**: Representa el modelo del mundo. Inicializa la cuadrícula, los agentes y la suciedad.
+- **Server**: Contiene la configuración de visualización para el servidor MESA. Define como se representan los agentes y la suciedad en la cuadrícula.
 - **Main.py**: El punto de entrada del programa. Inicia el servidor MESA.
 
 
 ## Explicación del Algoritmo del Agente Aspiradora
 
-La clase `VaccuumAgent` representa el comportamiento de un agente aspiradora en la simulación VacuumWorld. Aquí hay un desglose del algoritmo principal seguido por el `VaccuumAgent`:
+La clase `VacuumAgent` representa el comportamiento de un agente aspiradora en la simulación VacuumWorld. Aquí hay un desglose del algoritmo principal seguido por el `VacuumAgent`:
 
 1. **Inicialización (método `__init__`)**:
    - El agente se inicializa con un ID único y una referencia al modelo al que pertenece.

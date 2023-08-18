@@ -30,13 +30,13 @@ def get_color(random_int):
     else:
         return "lightblue"
 
-class VaccuumAgent(Agent):
+class VacuumAgent(Agent):
     """
-    A class representing a vaccuum agent that cleans dirt from a grid world.
+    A class representing a vacuum agent that cleans dirt from a grid world.
     """
     def __init__(self, unique_id: int, model: Model) -> None:
         """
-        Constructor method that initializes the VaccuumAgent object with a unique ID and a reference to the model it belongs to.
+        Constructor method that initializes the VacuumAgent object with a unique ID and a reference to the model it belongs to.
 
         Args:
             unique_id (int): A unique identifier for the agent.
@@ -48,7 +48,7 @@ class VaccuumAgent(Agent):
         self.adjacent_steps = []  # Possible steps for DFS
         self.visited = []  # Visited tiles
         self.is_returning = False  # Is returning to previous cell in adjacent_steps
-        # Strip the string "vaccuum_" from the unique_id to get the random integer
+        # Strip the string "Vacuum_" from the unique_id to get the random integer
         random_int = int(unique_id[8:])
         self.color = get_color(random_int)
         
@@ -93,7 +93,7 @@ class VaccuumAgent(Agent):
             not_obstacle = True
             for cellmate in cellmates:
                 # Check if the cellmate is an obstacle or another agent then set not_obstacle to False
-                if type(cellmate).__name__ == "Obstacle" or type(cellmate).__name__ == "VaccuumAgent":
+                if type(cellmate).__name__ == "Obstacle" or type(cellmate).__name__ == "VacuumAgent":
                     not_obstacle = False
                     
             # Add the step to adjacent_steps if it has not been visited before and is not an obstacle

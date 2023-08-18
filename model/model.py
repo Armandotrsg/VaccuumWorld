@@ -1,11 +1,11 @@
 from mesa import Model 
-from agents.vaccuum import VaccuumAgent
+from agents.vacuum import VacuumAgent
 from agents.dirt import Dirt
 from agents.obstacle import Obstacle
 from mesa.time import RandomActivation
 from mesa.space import MultiGrid
 
-class VaccuumWorld(Model):
+class VacuumWorld(Model):
     def __init__ (self, N: int, D: int, O: int, width: int, height: int):
         #self.running = True
         self.num_agents = N
@@ -18,7 +18,7 @@ class VaccuumWorld(Model):
         
         for i in range(self.num_agents):
             unique_id = f"vaccuum_{i}"
-            a = VaccuumAgent(unique_id, self)
+            a = VacuumAgent(unique_id, self)
             self.schedule.add(a)
             
             # Add the agent to a random grid cell where there is no other agent
