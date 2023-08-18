@@ -35,7 +35,7 @@ Antes de ejecutar el programa, se recomienda configurar un entorno virtual. Esto
 
 4. Instala los paquetes requeridos:
    ```bash
-   pip install requirements.txt
+   pip install -r requirements.txt
    ```
 
 ### Resumen del Algoritmo
