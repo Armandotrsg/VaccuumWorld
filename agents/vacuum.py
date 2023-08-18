@@ -124,6 +124,9 @@ class VacuumAgent(Agent):
         print("Possible Steps",possible_steps)
         print("Target Position",target_position)
         print("New Position",new_position)
+        
+        if self.return_counter == -1:
+            self.visited.insert(0, self.pos)
 
         if target_position in possible_steps:
             # If the target position is reachable, move to it and remove it from adjacent_steps
@@ -134,6 +137,7 @@ class VacuumAgent(Agent):
             # Chop the array of the visited cells to the amount of cells that have been back tracked before
             for i in range(-1, self.return_counter, -1):
                 self.visited.insert(0, self.visited.pop())
+            print("New Visited:",self.visited)
         elif new_position in possible_steps: 
             self.return_counter -= 1 # Decrement the return counter
             
