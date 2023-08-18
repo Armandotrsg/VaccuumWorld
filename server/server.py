@@ -1,7 +1,7 @@
 from mesa.visualization.modules import CanvasGrid 
 from mesa.visualization.ModularVisualization import ModularServer
 
-from model.model import VaccuumWorld
+from model.model import VacuumWorld
 from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.UserParam import Slider
 from mesa import Agent
@@ -52,7 +52,7 @@ def run():
 
     grid = CanvasGrid(agent_portrayal, x, y, 500, 500)
 
-    server = ModularServer(VaccuumWorld, [grid], "Vaccuum World", model_params)
+    server = ModularServer(VacuumWorld, [grid], "Vaccuum World", model_params)
     serverPort = 8521
     server.launch(port=serverPort)
 
