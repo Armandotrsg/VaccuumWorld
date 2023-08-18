@@ -107,10 +107,19 @@ class VacuumAgent(Agent):
     def returnToPreviousCell(self) -> None:
         print("Returning")
         # If the agent is returning, get the last visited cell and the last adjacent step which is the target position
-        new_position = self.visited.pop() # New position is the last visited cell
+        new_position = self.visited[-1] # New position is the last visited cell
         target_position = self.adjacent_steps[-1] # Target position is the last adjacent step
 
-        possible_steps = self.get_possible_steps(self.pos)
+        possible_steps = self.model.grid.get_neighborhood(self.pos, moore=False, include_center=False)
+        for step in possible_steps:
+            cellmates = self.model.grid.get_cell_list_contents([step])
+            for cellmate in cellmates:
+                # Check if the cellmate is an obstacle or another agent then set not_obstacle to False
+                if type(cellmate).__name__ == "Obstacle" or type(cellmate).__name__ == "VacuumAgent":
+                    possible_steps.remove(step)
+        
+        print("Visutados:",self.visited)
+        print("Current Position",self.pos)
         print("Possible Steps",possible_steps)
         print("Target Position",target_position)
         print("New Position",new_position)
@@ -120,11 +129,7 @@ class VacuumAgent(Agent):
             self.model.grid.move_agent(self, target_position)
             self.adjacent_steps.pop()
             self.is_returning = False
-        elif new_position in possible_steps:
-            # If the last visited cell is reachable, move to it and remove it from visited
-            #self.visited.pop()
-            # Add again to the front of visited
-            self.visited.insert(0, new_position)
+        elif new_position in possible_steps: 
             self.model.grid.move_agent(self, new_position)
 
     def move(self) -> None:
