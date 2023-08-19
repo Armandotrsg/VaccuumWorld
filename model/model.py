@@ -6,11 +6,13 @@ from mesa.time import RandomActivation
 from mesa.space import MultiGrid
 from mesa.datacollection import DataCollector
 
+from time import time
+
 class VacuumWorld(Model):
     """
     A class representing a vacuum world model that contains agents, dirt, and obstacles.
     """
-    def __init__ (self, N: int, D: int, O: int, width: int, height: int):
+    def __init__ (self, N: int, D: int, O: int, width: int, height: int, max_time: int):
         """
         Constructor method that initializes the VacuumWorld object with the number of agents, dirt, 
         obstacles, and the width and height of the grid and places them randomly in the grid.
@@ -21,11 +23,14 @@ class VacuumWorld(Model):
             O (int): The number of obstacle cells in the model.
             width (int): The width of the grid.
             height (int): The height of the grid.
+            max_time (int): The maximum number of minutes to run the simulation.
         """
         self.running = True
         self.num_agents = N
         self.num_dirt = D
         self.num_obstacles = O
+        self.max_time = max_time
+        self.start_time = time()
         
         self.grid = MultiGrid(width, height, False)
         self.schedule = RandomActivation(self)
@@ -72,12 +77,18 @@ class VacuumWorld(Model):
     def step(self):
         """
         Method that represents a step in the simulation for the vacuum world. It calls the step() method 
-        for each agent in the model and stops the simulation if all dirt has been cleaned.
+        for each agent in the model and stops the simulation if all dirt has been cleaned or if the 
+        maximum time has been reached.
         """
         self.schedule.step()
         self.datacollector.collect(self)
         if self.dirt_cleaned == self.num_dirt:
             # Stop the simulation if all dirt has been cleaned
             self.running = False
+            print(f"All dirt cleaned in {self.schedule.steps} steps.")
+        elif time() - self.start_time > self.max_time * 60:
+            # Stop the simulation if the maximum time has been reached
+            self.running = False
+            print(f"Maximum time of {self.max_time} minutes reached.")
         
             

@@ -58,7 +58,8 @@ def run() -> None:
         "D": number_of_dirt,
         "O": number_of_obstacles,
         "width": x,
-        "height": y
+        "height": y,
+        "max_time": 1
     }
 
     grid = CanvasGrid(agent_portrayal, x, y, 500, 500)
