@@ -39,7 +39,7 @@ class VacuumAgent(Agent):
             if type(i).__name__ == "Dirt":
                 self.model.grid.remove_agent(i)
                 self.cleaned += 1
-                self.model.dirt_count -= 1
+                self.model.dirt_cleaned += 1
 
     def step(self) -> None:
         """

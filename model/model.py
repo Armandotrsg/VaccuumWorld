@@ -34,7 +34,6 @@ class VacuumWorld(Model):
             unique_id = f"dirt_{i}"
             d = Dirt(unique_id, self)
             self.schedule.add(d)
-            self.dirt_cleaned += 1
             
             # Add the dirt to a random grid cell
             x = self.random.randrange(self.grid.width)
@@ -69,6 +68,8 @@ class VacuumWorld(Model):
         for each agent in the model and stops the simulation if all dirt has been cleaned.
         """
         self.schedule.step()
+        print(self.num_dirt)
+        print(self.dirt_cleaned)
         if self.dirt_cleaned == self.num_dirt:
             # Stop the simulation if all dirt has been cleaned
             self.running = False
