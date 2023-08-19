@@ -1,4 +1,4 @@
-def get_color(random_int):
+def get_color(random_int: int):
     """
     Method that takes a random integer as input and returns a color string based on the integer.
 

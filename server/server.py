@@ -7,6 +7,15 @@ from mesa.visualization.UserParam import Slider
 from mesa import Agent
 
 def agent_portrayal(agent: Agent):
+    """
+    Function that returns a dictionary of attributes that define how an agent is displayed in the visualization.
+
+    Args:
+        agent (Agent): The agent to be displayed.
+
+    Returns:
+        dict: A dictionary of attributes that define how the agent is displayed in the visualization.
+    """
     #Check if the agent is an instance of class VaccuumAgent
     if type(agent).__name__ == "VacuumAgent":
         #Get random color for each agent
@@ -33,7 +42,10 @@ def agent_portrayal(agent: Agent):
         
     return portrayal
 
-def run():
+def run() -> None:
+    """
+    Function that sets up and runs the visualization server for the vacuum world model.
+    """
     x = 5
     y = 5
 

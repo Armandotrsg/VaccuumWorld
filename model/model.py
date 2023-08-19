@@ -6,21 +6,35 @@ from mesa.time import RandomActivation
 from mesa.space import MultiGrid
 
 class VacuumWorld(Model):
+    """
+    A class representing a vacuum world model that contains agents, dirt, and obstacles.
+    """
     def __init__ (self, N: int, D: int, O: int, width: int, height: int):
-        #self.running = True
+        """
+        Constructor method that initializes the VacuumWorld object with the number of agents, dirt, 
+        obstacles, and the width and height of the grid and places them randomly in the grid.
+
+        Args:
+            N (int): The number of vacuum agents in the model.
+            D (int): The number of dirt cells in the model.
+            O (int): The number of obstacle cells in the model.
+            width (int): The width of the grid.
+            height (int): The height of the grid.
+        """
+        self.running = True
         self.num_agents = N
         self.num_dirt = D
         self.num_obstacles = O
         
         self.grid = MultiGrid(width, height, False)
         self.schedule = RandomActivation(self)
-        self.dirt_count = 0
+        self.dirt_cleaned = 0
                 
         for i in range(self.num_dirt):
             unique_id = f"dirt_{i}"
             d = Dirt(unique_id, self)
             self.schedule.add(d)
-            self.dirt_count += 1
+            self.dirt_cleaned += 1
             
             # Add the dirt to a random grid cell
             x = self.random.randrange(self.grid.width)
@@ -50,4 +64,12 @@ class VacuumWorld(Model):
                 self.grid.move_to_empty(o)
                 
     def step(self):
+        """
+        Method that represents a step in the simulation for the vacuum world. It calls the step() method 
+        for each agent in the model and stops the simulation if all dirt has been cleaned.
+        """
         self.schedule.step()
+        if self.dirt_cleaned == self.num_dirt:
+            # Stop the simulation if all dirt has been cleaned
+            self.running = False
+            
