@@ -70,39 +70,42 @@ Antes de ejecutar el programa, se recomienda configurar un entorno virtual. Esto
 - **Server**: Contiene la configuración de visualización para el servidor MESA. Define como se representan los agentes y la suciedad en la cuadrícula.
 - **Main.py**: El punto de entrada del programa. Inicia el servidor MESA.
 
-
 ## Explicación del Algoritmo del Agente Aspiradora
 
 La clase `VacuumAgent` representa el comportamiento de un agente aspiradora en la simulación VacuumWorld. Aquí hay un desglose del algoritmo principal seguido por el `VacuumAgent`:
 
 1. **Inicialización (método `__init__`)**:
    - El agente se inicializa con un ID único y una referencia al modelo al que pertenece.
-   - El agente lleva un registro del número de pasos realizados, el número de celdas limpiadas, los posibles pasos para la Búsqueda en Profundidad (DFS) y las celdas que ha visitado.
-   - El agente tiene un estado `is_returning` para determinar si está retrocediendo.
-   - El color del agente se determina en función del ID único.
+   - Se establecen contadores para los pasos realizados y las celdas limpiadas.
+   - Se inicializan listas y conjuntos para rastrear los pasos adyacentes, las celdas visitadas y las celdas a las que debe regresar.
+   - Se determina el color del agente basado en su ID único.
 
 2. **Limpieza (método `clean`)**:
    - El agente verifica su posición actual en busca de suciedad.
-   - Si hay suciedad en la misma celda que el agente, este la limpia, incrementa su contador de celdas limpiadas y decrementa el contador de suciedad del modelo.
+   - Si encuentra suciedad en su posición, la limpia y actualiza los contadores correspondientes.
 
 3. **Movimiento (método `step`)**:
-   - El agente primero intenta limpiar la celda actual.
-   - Luego intenta moverse a una celda vecina usando el método `move`.
+   - El agente intenta limpiar la celda actual.
+   - Posteriormente, intenta moverse a una celda vecina usando el método `move`.
 
-4. **Determinar Pasos Posibles (método `get_possible_steps`)**:
-   - Dada la posición actual del agente, este método determina las celdas vecinas a las que el agente puede moverse.
-   - Filtra las celdas que contienen obstáculos u otros agentes.
-   - Actualiza la lista `adjacent_steps` con cualquier nueva celda vecina que no haya sido visitada anteriormente.
+4. **Agregar a Pasos Adyacentes (método `append_to_adjacent`)**:
+   - Este método agrega una nueva posición a la lista de pasos adyacentes y ajusta el contador de pasos necesarios para regresar a esa posición.
 
-5. **Lógica de Movimiento (método `move`)**:
-   - Si el agente no está en el estado `is_returning`:
-     - Añade su posición actual a la lista `visited`.
-     - Determina los posibles pasos desde su posición actual.
-     - Si no hay pasos posibles, establece `is_returning` en `True` para comenzar a retroceder.
-     - De lo contrario, se mueve a la última celda en la lista `adjacent_steps`.
-   - Si el agente está en el estado `is_returning` (retrocediendo):
-     - Intenta volver a la última celda visitada.
-     - Si la posición objetivo (última celda en `adjacent_steps`) es alcanzable, se mueve allí y sale del estado `is_returning`.
-     - Si la última celda visitada es alcanzable, se mueve allí y continúa retrocediendo.
+5. **Determinar Pasos Posibles (método `get_possible_steps`)**:
+   - El agente identifica las celdas vecinas a las que puede moverse.
+   - Se excluyen las celdas que contienen obstáculos u otros agentes aspiradores.
+   - Las celdas no visitadas se agregan a la lista de pasos adyacentes.
 
-El agente utiliza un enfoque de búsqueda por DFS para explorar la cuadrícula. Intenta moverse lo más profundo posible en la cuadrícula hasta que no pueda moverse más, momento en el que comienza a retroceder (volviendo a las celdas visitadas anteriormente) hasta que encuentra un nuevo camino para explorar. Este proceso continúa hasta que el agente ha explorado toda la cuadrícula o hasta que finaliza la simulación (toda la suciedad está limpia o se alcanza el número máximo de pasos).
+6. **Lógica de Retroceso (método `returnToPreviousCell`)**:
+   - Si el agente está retrocediendo, este método intenta mover al agente de regreso a una celda anterior en la lista de pasos adyacentes.
+   - Si no puede regresar directamente a la celda objetivo, retrocede a la última celda visitada.
+
+7. **Mover a la Siguiente Celda (método `move_to_next_cell`)**:
+   - Si hay pasos posibles, el agente se mueve a la siguiente celda en la lista de pasos adyacentes.
+   - Si no hay pasos posibles, cambia su estado a `is_returning` para comenzar a retroceder.
+
+8. **Lógica de Movimiento (método `move`)**:
+   - Si el agente no está retrocediendo (`is_returning` es `False`), utiliza el método `move_to_next_cell` para avanzar.
+   - Si el agente está retrocediendo (`is_returning` es `True`), utiliza el método `returnToPreviousCell` para retroceder.
+
+El algoritmo del agente aspiradora utiliza un enfoque de búsqueda en profundidad (DFS) para explorar la cuadrícula. Cuando se encuentra en un callejón sin salida o no puede avanzar más, comienza a retroceder a las celdas anteriores hasta que encuentra un nuevo camino para explorar. Este proceso se repite hasta que el agente ha explorado toda la cuadrícula o hasta que se cumplan las condiciones de finalización de la simulación.
