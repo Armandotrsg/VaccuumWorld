@@ -34,13 +34,12 @@ def agent_portrayal(agent: Agent):
     return portrayal
 
 def run():
-    x = 10
-    y = 10
+    x = 5
+    y = 5
 
-    number_of_agents = Slider("Number of agents", 2, 1, x)
+    number_of_agents = Slider("Number of agents", 1, 1, x)
     number_of_dirt = Slider("Number of dirt", 2, 1, x*y)
-    number_of_obstacles = Slider("Number of obstacles", 2, 1, 30)
-
+    number_of_obstacles = Slider("Number of obstacles", 3, 1, 30)
 
     model_params = {
         "N": number_of_agents,
@@ -55,4 +54,3 @@ def run():
     server = ModularServer(VacuumWorld, [grid], "Vaccuum World", model_params)
     serverPort = 8521
     server.launch(port=serverPort)
-
