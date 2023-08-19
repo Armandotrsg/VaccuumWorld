@@ -4,6 +4,7 @@ from agents.dirt import Dirt
 from agents.obstacle import Obstacle
 from mesa.time import RandomActivation
 from mesa.space import MultiGrid
+from mesa.datacollection import DataCollector
 
 class VacuumWorld(Model):
     """
@@ -29,6 +30,12 @@ class VacuumWorld(Model):
         self.grid = MultiGrid(width, height, False)
         self.schedule = RandomActivation(self)
         self.dirt_cleaned = 0
+        
+        self.datacollector = DataCollector(
+            {
+                "cleaned": lambda m: m.dirt_cleaned
+            }
+        )
                 
         for i in range(self.num_dirt):
             unique_id = f"dirt_{i}"
@@ -68,9 +75,9 @@ class VacuumWorld(Model):
         for each agent in the model and stops the simulation if all dirt has been cleaned.
         """
         self.schedule.step()
-        print(self.num_dirt)
-        print(self.dirt_cleaned)
+        self.datacollector.collect(self)
         if self.dirt_cleaned == self.num_dirt:
             # Stop the simulation if all dirt has been cleaned
             self.running = False
+        
             
