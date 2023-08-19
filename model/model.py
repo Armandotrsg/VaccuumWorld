@@ -12,7 +12,7 @@ class VacuumWorld(Model):
     """
     A class representing a vacuum world model that contains agents, dirt, and obstacles.
     """
-    def __init__ (self, N: int, D: int, O: int, width: int, height: int, max_time: int):
+    def __init__ (self, N: int, D: int, O: int, width: int, height: int, max_time: int = None, max_steps: int = None):
         """
         Constructor method that initializes the VacuumWorld object with the number of agents, dirt, 
         obstacles, and the width and height of the grid and places them randomly in the grid.
@@ -23,7 +23,8 @@ class VacuumWorld(Model):
             O (int): The number of obstacle cells in the model.
             width (int): The width of the grid.
             height (int): The height of the grid.
-            max_time (int): The maximum number of minutes to run the simulation.
+            max_time (int): The maximum number of minutes to run the simulation. Defaults to None.
+            max_steps (int, optional): The maximum number of steps to run the simulation. Defaults to None.
         """
         self.running = True
         self.num_agents = N
@@ -31,6 +32,7 @@ class VacuumWorld(Model):
         self.num_obstacles = O
         self.max_time = max_time
         self.start_time = time()
+        self.max_steps = max_steps
         
         self.grid = MultiGrid(width, height, False)
         self.schedule = RandomActivation(self)
@@ -86,9 +88,13 @@ class VacuumWorld(Model):
             # Stop the simulation if all dirt has been cleaned
             self.running = False
             print(f"All dirt cleaned in {self.schedule.steps} steps.")
-        elif time() - self.start_time > self.max_time * 60:
+        elif self.max_time is not None and time() - self.start_time > self.max_time * 60:
             # Stop the simulation if the maximum time has been reached
             self.running = False
             print(f"Maximum time of {self.max_time} minutes reached.")
+        elif self.max_steps is not None and self.schedule.steps >= self.max_steps:
+            # Stop the simulation if the maximum number of steps has been reached
+            self.running = False
+            print(f"Maximum number of steps reached: {self.max_steps}.")
         
             

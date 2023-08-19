@@ -42,13 +42,16 @@ def agent_portrayal(agent: Agent):
         
     return portrayal
 
-def run() -> None:
+def run_simulation(x: int = 10, y:int = 10, max_time: float = 1.5, max_steps: int = None) -> None:
     """
-    Function that sets up and runs the visualization server for the vacuum world model.
-    """
-    x = 10
-    y = 10
+    Function that runs the simulation with the given parameters.
 
+    Args:
+        x (int, optional): Number of tiles in x. Defaults to 10.
+        y (int, optional): Number of tiles in y. Defaults to 10.
+        max_time (float, optional): Maximum number of minutes to run the simulation. Defaults to 1.5.
+        max_steps (int, optional): Maximum number of steps the agent can take. Defaults to None.
+    """
     number_of_agents = Slider("Number of agents", 1, 1, x)
     number_of_dirt = Slider("Number of dirt", 2, 1, x*y)
     number_of_obstacles = Slider("Number of obstacles", 3, 1, 30)
@@ -59,7 +62,8 @@ def run() -> None:
         "O": number_of_obstacles,
         "width": x,
         "height": y,
-        "max_time": 1
+        "max_time": max_time,
+        "max_steps": max_steps
     }
 
     grid = CanvasGrid(agent_portrayal, x, y, 500, 500)
