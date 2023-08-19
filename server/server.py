@@ -42,14 +42,14 @@ def agent_portrayal(agent: Agent):
         
     return portrayal
 
-def run_simulation(x: int = 10, y:int = 10, max_time: float = 1.5, max_steps: int = None) -> None:
+def run_simulation(x: int = 10, y:int = 10, max_time: float = None, max_steps: int = None) -> None:
     """
     Function that runs the simulation with the given parameters.
 
     Args:
         x (int, optional): Number of tiles in x. Defaults to 10.
         y (int, optional): Number of tiles in y. Defaults to 10.
-        max_time (float, optional): Maximum number of minutes to run the simulation. Defaults to 1.5.
+        max_time (float, optional): Maximum number of minutes to run the simulation. Defaults to None.
         max_steps (int, optional): Maximum number of steps the agent can take. Defaults to None.
     """
     number_of_agents = Slider("Number of agents", 1, 1, x)
