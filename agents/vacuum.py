@@ -47,22 +47,27 @@ class VacuumAgent(Agent):
         cell using the move() method.
         """
         self.clean()
-        try:
-            self.move()
-            self.steps += 1
-        except:
-            pass
+        # try:
+        self.move()
+        self.steps += 1
+        # except:
+        #     pass
         
-    def append_to_adjacent(self, position: tuple) -> None:
+    def append_to_adjacent(self, position: list) -> None:
         """
         Method that appends a new position to the adjacent_steps list.
 
         Args:
-            position (tuple): A tuple representing the position to append to the adjacent_steps list.
+            position (list of tuples): A list of tuples representing the positions to append to the adjacent_steps list.
         """
+
+        # If the last adjacent step has the same position as the new position, increment the counter
         if len(self.adjacent_steps) > 0:
             self.adjacent_steps[-1] = (self.adjacent_steps[-1][0], self.adjacent_steps[-1][1] + 1)
-        self.adjacent_steps.append((position, 1))
+        
+        for pos in position:
+            self.adjacent_steps.append((pos, 1))
+        
         
     def get_possible_steps(self, position: tuple) -> list:
         """
@@ -76,6 +81,7 @@ class VacuumAgent(Agent):
         """
         possible_steps = self.model.grid.get_neighborhood(position, moore=False, include_center=False)
         not_obstacle_steps = []
+        will_append_to_adjacent = []
         for step in possible_steps:
             cellmates = self.model.grid.get_cell_list_contents([step])
             not_obstacle = True
@@ -86,10 +92,14 @@ class VacuumAgent(Agent):
                     
             # Add the step to adjacent_steps if it has not been visited before and is not an obstacle
             if step not in self.visited and not_obstacle and not self.is_returning:
-                self.append_to_adjacent(step)
+                will_append_to_adjacent.append(step)
                 not_obstacle_steps.append(step)
             elif not_obstacle and self.is_returning:
                 not_obstacle_steps.append(step)
+                
+        if len(will_append_to_adjacent) > 0:
+            self.append_to_adjacent(will_append_to_adjacent)
+            
         return not_obstacle_steps
     
     def return_to_previous_cell(self) -> None:
@@ -101,10 +111,11 @@ class VacuumAgent(Agent):
             target_position_counter = self.adjacent_steps[-1][1] # Target position counter is the number of steps to return to the target position
         except:
             print("Error: No adjacent steps")
+            self.is_returning = False
             return
         possible_steps = self.get_possible_steps(self.pos)
         
-        if target_position_counter > 1:
+        if target_position_counter >= 1:
             # If the target position counter is greater than 1, move to the last back_track position
             new_position = self.back_track[-1]
             if new_position in possible_steps:
@@ -122,7 +133,8 @@ class VacuumAgent(Agent):
     
     def move_to_next_cell(self) -> None:
         """
-        Method that moves the agent to the next cell in the adjacent_steps list if there are possible steps.
+        Method that moves the agent to the next cell in the adjacent_steps list if there are possible steps, 
+        giving priority to cells with dirt.
         """
         possible_steps = self.get_possible_steps(self.pos)
         if len(possible_steps) == 0:
@@ -133,7 +145,17 @@ class VacuumAgent(Agent):
             self.visited.add(self.pos) # Add the current position to visited
             self.back_track.append(self.pos) # Add the current position to back_track
             
-            # If there are no possible steps with dirt, move to the last adjacent step
+            # Check if there are any adjacent steps with dirt with a 1 distance and are in the possible steps
+            i = -1
+            while abs(i) <= len(self.adjacent_steps) and self.adjacent_steps[i][1] == 1:
+                # Get cellmates of the adjacent step
+                cellmates = self.model.grid.get_cell_list_contents([self.adjacent_steps[i][0]])
+                if self.adjacent_steps[i][0] in possible_steps and len(cellmates) > 0 and type(cellmates[0]).__name__ == "Dirt":
+                    self.model.grid.move_agent(self, self.adjacent_steps[i][0])
+                    self.adjacent_steps.remove(self.adjacent_steps[i])
+                    return
+                i -= 1
+            
             new_position = self.adjacent_steps.pop()
             self.model.grid.move_agent(self, new_position[0])
 
