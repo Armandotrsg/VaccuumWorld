@@ -12,12 +12,7 @@ def get_inputs():
     - --no-max-steps: Don't set a maximum number of steps the agent can take.
     
     Returns:
-        dict: A dictionary containing the input parameters for the simulation. The dictionary
-        contains the following keys:
-        - x (int): The number of tiles in the x direction.
-        - y (int): The number of tiles in the y direction.
-        - max_time (float): The maximum number of minutes to run the simulation.
-        - max_steps (int): The maximum number of steps the agent can take.
+        dict: A dictionary containing the input parameters for the simulation.
     """
 
     parser = argparse.ArgumentParser(description="Run the vacuum world simulation.")
