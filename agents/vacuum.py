@@ -100,6 +100,7 @@ class VacuumAgent(Agent):
             target_position = self.adjacent_steps[-1][0] # Target position is the last adjacent step
             target_position_counter = self.adjacent_steps[-1][1] # Target position counter is the number of steps to return to the target position
         except:
+            print("Error: No adjacent steps")
             return
         possible_steps = self.get_possible_steps(self.pos)
         
@@ -132,14 +133,15 @@ class VacuumAgent(Agent):
             self.visited.add(self.pos) # Add the current position to visited
             self.back_track.append(self.pos) # Add the current position to back_track
             
+            print(possible_steps)
             # If there are possible steps, move to the possible step that has dirt
-            for step in possible_steps:
-                cellmates = self.model.grid.get_cell_list_contents([step])
-                for cellmate in cellmates:
-                    if type(cellmate).__name__ == "Dirt":
-                        self.model.grid.move_agent(self, step)
-                        self.adjacent_steps.pop()
-                        return
+            # for step in possible_steps:
+            #     cellmates = self.model.grid.get_cell_list_contents([step])
+            #     for cellmate in cellmates:
+            #         if type(cellmate).__name__ == "Dirt":
+            #             self.model.grid.move_agent(self, step)
+            #             self.adjacent_steps.remove((step, 1))
+            #             return
             # If there are no possible steps with dirt, move to the last adjacent step
             new_position = self.adjacent_steps.pop()
             self.model.grid.move_agent(self, new_position[0])

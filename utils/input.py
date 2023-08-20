@@ -28,7 +28,7 @@ def get_inputs():
     parser.add_argument("--max-steps", type=int, help="Maximum number of steps the agent can take")
     parser.set_defaults(max_steps=None)
     
-    parser.add_argument("--no-max-steps", type=bool, help="Don't set a maximum number of steps the agent can take")
+    parser.add_argument("--no-max-steps", action="store_true", help="Don't set a maximum number of steps the agent can take")
     parser.set_defaults(no_max_steps=False)
     
     parser.add_argument("--show-chart", action=argparse.BooleanOptionalAction, help="Show the chart")
