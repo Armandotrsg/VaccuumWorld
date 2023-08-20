@@ -111,8 +111,9 @@ class VacuumAgent(Agent):
             target_position_counter = self.adjacent_steps[-1][1] # Target position counter is the number of steps to return to the target position
         except:
             print("Error: No adjacent steps")
-            self.is_returning = False
+            self.model.running = False
             return
+        
         possible_steps = self.get_possible_steps(self.pos)
         
         if target_position_counter >= 1:
