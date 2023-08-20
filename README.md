@@ -103,7 +103,7 @@ La clase `VacuumAgent` representa el comportamiento de un agente aspiradora en l
    - Posteriormente, intenta moverse a una celda vecina usando el método `move`.
 
 4. **Agregar a Pasos Adyacentes (método `append_to_adjacent`)**:
-   - Este método agrega una nueva posición a la lista de pasos adyacentes y ajusta el contador de pasos necesarios para regresar a esa posición.
+   - Este método agrega nuevas posiciones a la lista de pasos adyacentes y ajusta el contador de pasos necesarios para regresar a esa posición.
 
 5. **Determinar Pasos Posibles (método `get_possible_steps`)**:
    - El agente identifica las celdas vecinas a las que puede moverse.
@@ -115,7 +115,7 @@ La clase `VacuumAgent` representa el comportamiento de un agente aspiradora en l
    - Si no puede regresar directamente a la celda objetivo, retrocede a la última celda visitada.
 
 7. **Mover a la Siguiente Celda (método `move_to_next_cell`)**:
-   - Si hay pasos posibles, el agente se mueve a la siguiente celda en la lista de pasos adyacentes.
+   - Si hay pasos posibles, el agente se mueve a la siguiente celda en la lista de pasos adyacentes, dando prioridad a las celdas sucias.
    - Si no hay pasos posibles, cambia su estado a `is_returning` para comenzar a retroceder.
 
 8. **Lógica de Movimiento (método `move`)**:
