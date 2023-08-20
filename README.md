@@ -55,10 +55,22 @@ Antes de ejecutar el programa, se recomienda configurar un entorno virtual. Esto
    ```bash
    python3 main.py
    ```
-
+   Puedes agregar las banderas `-x` y `-y` para especificar el tamaño de la cuadrícula:
+   ```bash
+   python3 main.py -x 10 -y 10
+   ```
+   También puedes agregar las banderas `-t` y `-s` para especificar el tiempo máximo de ejecución y el tiempo máximo de pasos, respectivamente:
+   ```bash
+   python3 main.py -t 100 -s 1000
+   ```
 3. Esto iniciará el servidor MESA y abrirá la simulación en tu navegador web predeterminado.
 4. Usa los deslizadores proporcionados para ajustar el número de agentes y la suciedad.
 5. Haz clic en "Start" para comenzar la simulación y en "Step" para avanzarla un paso a la vez.
+
+Para obtener más información sobre las banderas disponibles, ejecuta el siguiente comando:
+```bash
+python3 main.py --help
+```
 
 ### Entendiendo el Código
 

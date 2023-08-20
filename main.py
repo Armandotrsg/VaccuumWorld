@@ -1,10 +1,9 @@
 from server.server import run_simulation
-from sys import argv
 from utils.input import get_inputs
 
 def main():
     # Get the inputs from the command line in this order: x, y, max_time, max_steps.
-    inputs = get_inputs(argv)
+    inputs = get_inputs()
     
     run_simulation(
         x = inputs["x"],
