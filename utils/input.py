@@ -7,8 +7,9 @@ def get_inputs():
     - -x: Number of tiles in x.
     - -y: Number of tiles in y.
     - --max-time: Maximum number of minutes to run the simulation.
-    - --max-steps: Maximum number of steps the agent can take.
+    - --max-steps: Maximum number of steps the agent can take. Defaults to x * y + 10.
     - --show-chart: Show the chart. Or alternatively, --no-show-chart to hide the chart.
+    - --no-max-steps: Don't set a maximum number of steps the agent can take.
     
     Returns:
         dict: A dictionary containing the input parameters for the simulation. The dictionary
@@ -32,10 +33,18 @@ def get_inputs():
     parser.add_argument("--max-steps", type=int, help="Maximum number of steps the agent can take")
     parser.set_defaults(max_steps=None)
     
+    parser.add_argument("--no-max-steps", type=bool, help="Don't set a maximum number of steps the agent can take")
+    parser.set_defaults(no_max_steps=False)
+    
     parser.add_argument("--show-chart", action=argparse.BooleanOptionalAction, help="Show the chart")
     parser.set_defaults(show_chart=True)
     
     args = parser.parse_args()
+    
+    if args.no_max_steps:
+        args.max_steps = None
+    else:
+        args.max_steps = args.x*args.y + 10 if args.max_steps is None else args.max_steps
     
     return {
         "x": args.x,

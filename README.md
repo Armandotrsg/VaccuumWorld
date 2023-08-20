@@ -59,7 +59,7 @@ Antes de ejecutar el programa, se recomienda configurar un entorno virtual. Esto
    ```bash
    python3 main.py -x 10 -y 10
    ```
-   También puedes agregar las banderas `-t` y `--max-steps` para especificar el tiempo máximo de ejecución y el tiempo máximo de pasos, respectivamente:
+   También puedes agregar las banderas `-t` y `--max-steps` para especificar el tiempo máximo de ejecución y el máximo de pasos (de no ponerse, el valor predeterminado es x * y + 10), respectivamente:
    ```bash
    python3 main.py -t 100 --max-steps 1000
    ```
