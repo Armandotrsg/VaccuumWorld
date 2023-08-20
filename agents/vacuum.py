@@ -47,11 +47,11 @@ class VacuumAgent(Agent):
         cell using the move() method.
         """
         self.clean()
-        # try:
-        self.move()
-        self.steps += 1
-        # except:
-        #     pass
+        try:
+            self.move()
+            self.steps += 1
+        except:
+            pass
         
     def append_to_adjacent(self, position: list) -> None:
         """
