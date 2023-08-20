@@ -40,13 +40,15 @@ Antes de ejecutar el programa, se recomienda configurar un entorno virtual. Esto
 
 ### Resumen del Algoritmo
 
-1. La simulación inicializa una habitación de tamaño MxN con un número especificado de agentes aspiradores y espacios sucios.
+1. La simulación inicializa una habitación de tamaño MxN con un número especificado de agentes aspiradores, obstáculos y espacios sucios.
 2. Cada agente aspirador solo puede moverse hacia adelante y puede girar en cuatro direcciones (N, S, E, W).
-3. El agente solo puede "ver" un conjunto determinado de espacios a su alrededor.
+3. El agente solo puede "ver" un conjunto determinado de espacios a su alrededor (solo en las 4 direcciones que se puede mover).
 4. Si un agente está en un espacio sucio, lo limpiará.
-5. La simulación termina cuando:
+5. Un agente no se puede mover a un espacio que contenga un obstáculo u otro agente.
+6. La simulación termina cuando:
    - Todos los espacios están limpios.
    - Se alcanza el número máximo de pasos.
+   - Se alcanza el tiempo máximo de ejecución.
 
 ### Ejecutando la Simulación
 
