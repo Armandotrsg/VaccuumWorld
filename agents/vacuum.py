@@ -92,7 +92,7 @@ class VacuumAgent(Agent):
                 not_obstacle_steps.append(step)
         return not_obstacle_steps
     
-    def returnToPreviousCell(self) -> None:
+    def return_to_previous_cell(self) -> None:
         """
         Method that moves the agent to the previous cell in the adjacent_steps list if the agent is returning.
         """
@@ -127,20 +127,28 @@ class VacuumAgent(Agent):
         if len(possible_steps) == 0:
             # If there are no possible steps, set is_returning to True
             self.is_returning = True
-            self.returnToPreviousCell()
+            self.return_to_previous_cell()
         else:
             self.visited.add(self.pos) # Add the current position to visited
             self.back_track.append(self.pos) # Add the current position to back_track
             
-            # If there are possible steps, move to the last adjacent step in adjacent_steps
+            # If there are possible steps, move to the possible step that has dirt
+            for step in possible_steps:
+                cellmates = self.model.grid.get_cell_list_contents([step])
+                for cellmate in cellmates:
+                    if type(cellmate).__name__ == "Dirt":
+                        self.model.grid.move_agent(self, step)
+                        self.adjacent_steps.pop()
+                        return
+            # If there are no possible steps with dirt, move to the last adjacent step
             new_position = self.adjacent_steps.pop()
             self.model.grid.move_agent(self, new_position[0])
 
     def move(self) -> None:
         """
-        Method that calls the move_to_next_cell() or returnToPreviousCell() method depending on whether the agent is returning.
+        Method that calls the move_to_next_cell() or return_to_previous_cell() method depending on whether the agent is returning.
         """
         if not self.is_returning: # If the agent is not returning, add the current position to visited and get possible steps
             self.move_to_next_cell()
         else:
-            self.returnToPreviousCell()
+            self.return_to_previous_cell()

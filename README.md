@@ -110,7 +110,7 @@ La clase `VacuumAgent` representa el comportamiento de un agente aspiradora en l
    - Se excluyen las celdas que contienen obstáculos u otros agentes aspiradores.
    - Las celdas no visitadas se agregan a la lista de pasos adyacentes.
 
-6. **Lógica de Retroceso (método `returnToPreviousCell`)**:
+6. **Lógica de Retroceso (método `return_to_previous_cell`)**:
    - Si el agente está retrocediendo, este método intenta mover al agente de regreso a una celda anterior en la lista de pasos adyacentes.
    - Si no puede regresar directamente a la celda objetivo, retrocede a la última celda visitada.
 
