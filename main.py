@@ -9,7 +9,8 @@ def main():
         x = inputs["x"],
         y = inputs["y"],
         max_time = inputs["max_time"],
-        max_steps = inputs["max_steps"]
+        max_steps = inputs["max_steps"],
+        show_chart=inputs["show_chart"]
     )
     
 if __name__ == "__main__":

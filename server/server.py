@@ -42,7 +42,7 @@ def agent_portrayal(agent: Agent):
         
     return portrayal
 
-def run_simulation(x: int = 10, y:int = 10, max_time: float = None, max_steps: int = None) -> None:
+def run_simulation(x: int = 10, y:int = 10, max_time: float = None, max_steps: int = None, show_chart: bool = True) -> None:
     """
     Function that runs the simulation with the given parameters.
 
@@ -73,6 +73,9 @@ def run_simulation(x: int = 10, y:int = 10, max_time: float = None, max_steps: i
         ]        
     )
 
-    server = ModularServer(VacuumWorld, [grid, chart], "Vaccuum World", model_params)
+    if show_chart:
+        server = ModularServer(VacuumWorld, [grid, chart], "Vacuum World", model_params)
+    else:
+        server = ModularServer(VacuumWorld, [grid], "Vacuum World", model_params)
     serverPort = 8521
     server.launch(port=serverPort)
