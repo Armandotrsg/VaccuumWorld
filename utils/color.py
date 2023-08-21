@@ -1,3 +1,12 @@
+"""
+Nombre del archivo: dirt.py
+Autor: Armando Terrazas -- A01640924
+       Juan Daniel Muñoz -- A01641792
+       Jorge Wolburg -- A01640826
+       Diego Curiel -- A01640372
+Fecha de creación: 20/08/2023
+Descripción: Función que regresa un color aleatorio.
+"""
 def get_color(random_int: int):
     """
     Method that takes a random integer as input and returns a color string based on the integer.

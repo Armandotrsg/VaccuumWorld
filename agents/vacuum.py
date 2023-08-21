@@ -1,3 +1,12 @@
+"""
+Nombre del archivo: vacuum.py
+Autor: Armando Terrazas -- A01640924
+       Juan Daniel Muñoz -- A01641792
+       Jorge Wolburg -- A01640826
+       Diego Curiel -- A01640372
+Fecha de creación: 20/08/2023
+Descripción: Este archivo contiene la clase VacuumAgent, la cual representa al agente aspiradora en el modelo.
+"""
 from mesa import Agent
 from mesa.model import Model
 from utils.color import get_color

@@ -1,3 +1,13 @@
+"""
+Nombre del archivo: input.py
+Autor: Armando Terrazas -- A01640924
+       Juan Daniel Muñoz -- A01641792
+       Jorge Wolburg -- A01640826
+       Diego Curiel -- A01640372
+Fecha de creación: 20/08/2023
+Descripción: Este archivo contiene la función get_inputs, la cual se encarga de obtener 
+             los parámetros de entrada para la simulación.
+"""
 import argparse
 
 def get_inputs():

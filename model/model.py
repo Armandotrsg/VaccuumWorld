@@ -1,3 +1,13 @@
+"""
+Nombre del archivo: model.py
+Autor: Armando Terrazas -- A01640924
+       Juan Daniel Muñoz -- A01641792
+       Jorge Wolburg -- A01640826
+       Diego Curiel -- A01640372
+Fecha de creación: 20/08/2023
+Descripción: Este archivo contiene la clase VacuumWorld, la cual representa el modelo del mundo de la aspiradora.
+"""
+
 from mesa import Model 
 from agents.vacuum import VacuumAgent
 from agents.dirt import Dirt
@@ -5,7 +15,6 @@ from agents.obstacle import Obstacle
 from mesa.time import RandomActivation
 from mesa.space import MultiGrid
 from mesa.datacollection import DataCollector
-
 from time import time
 
 class VacuumWorld(Model):

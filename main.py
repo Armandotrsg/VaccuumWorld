@@ -1,3 +1,12 @@
+"""
+Nombre del archivo: main.py
+Autor: Armando Terrazas -- A01640924
+       Juan Daniel Muñoz -- A01641792
+       Jorge Wolburg -- A01640826
+       Diego Curiel -- A01640372
+Fecha de creación: 20/08/2023
+Descripción: Este archivo contiene la función main, la cual se encarga de correr la simulación.
+"""
 from server.server import run_simulation
 from utils.input import get_inputs
 
