@@ -123,3 +123,9 @@ La clase `VacuumAgent` representa el comportamiento de un agente aspiradora en l
    - Si el agente está retrocediendo (`is_returning` es `True`), utiliza el método `returnToPreviousCell` para retroceder.
 
 El algoritmo del agente aspiradora utiliza un enfoque de búsqueda en profundidad (DFS) para explorar la cuadrícula. Cuando se encuentra en un callejón sin salida o no puede avanzar más, comienza a retroceder a las celdas anteriores hasta que encuentra un nuevo camino para explorar. Este proceso se repite hasta que el agente ha explorado toda la cuadrícula o hasta que se cumplan las condiciones de finalización de la simulación.
+
+## Authors 🖋
+- Armando Terrazas Gomez - A01640924
+- Jorge German Wolburg Trujillo - A01640826
+- Juan Daniel Muñoz Dueñas - A01641792
+- Diego Curiel Castellanos - A01640372
