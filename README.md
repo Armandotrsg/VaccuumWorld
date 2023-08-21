@@ -6,7 +6,7 @@ El programa VacuumWorld es una simulación orientada a agentes utilizando el mar
 
 ### Prerrequisitos
 
-1. Python >3.9 instalado.
+1. Python >=3.9 instalado.
 2. Librería MESA instalada.
 
 ### Configuración del Entorno Virtual
